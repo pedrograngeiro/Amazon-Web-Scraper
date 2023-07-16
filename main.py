@@ -1,5 +1,3 @@
-# import libraries
-
 # import libraries util
 from util import extrator
 
@@ -8,6 +6,7 @@ import requests
 import smtplib
 import time
 import datetime
+import csv
 
 # Conenect to the website
 URL = "https://www.amazon.com.br/Headphone-Ouvido-HV-H2002d-Microfone-Falante/dp/B07Y2G7VX5?ufe=app_do%3Aamzn1.fos.6121c6c4-c969-43ae-92f7-cc248fc6181d"
@@ -27,3 +26,17 @@ soup2 = BeautifulSoup(soup1.prettify(), "html.parser")
 title = extrator.pegar_texto_id(soup2, "productTitle")
 price = extrator.pegar_texto_classe(soup2, "a-offscreen")
 
+price = price.strip()[1:]
+title = title.strip()
+today = datetime.date.today()
+
+header = ["Title", "Price", "Date"]
+data = [title, price, today]
+
+# Create a csv file
+with open("AmazonWebScraping.csv", "w", newline="", encoding="UTF8") as f:
+    writer = csv.writer(f)
+    writer.writerow(header)
+    writer.writerow(data)
+
+print(today)
