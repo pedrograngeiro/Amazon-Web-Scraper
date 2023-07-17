@@ -1,5 +1,6 @@
 # import libraries util
 from util import extrator
+from util import gerar_csv
 
 from bs4 import BeautifulSoup
 import requests
@@ -7,9 +8,10 @@ import smtplib
 import time
 import datetime
 import csv
+import pandas as pd
 
 # Conenect to the website
-URL = "https://www.amazon.com.br/Headphone-Ouvido-HV-H2002d-Microfone-Falante/dp/B07Y2G7VX5?ufe=app_do%3Aamzn1.fos.6121c6c4-c969-43ae-92f7-cc248fc6181d"
+URL = "https://www.amazon.com.br/Monitor-AOC-G-Sync-Compatible-27G2/dp/B088L3TM7X/ref=sr_1_1?pf_rd_i=16364756011&pf_rd_m=A3RN7G7QC5MWSZ&pf_rd_p=3a4566d3-19f5-4330-ba47-df1b7bbd88a2&pf_rd_r=TBJX7096TP23B8K7MYV4&pf_rd_s=merchandised-search-3&pf_rd_t=101&qid=1689553216&s=computers&sr=1-1&ufe=app_do%3Aamzn1.fos.25548f35-0de7-44b3-b28e-0f56f3f96147"
 
 headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/114.0.1823.79",
@@ -28,15 +30,11 @@ price = extrator.pegar_texto_classe(soup2, "a-offscreen")
 
 price = price.strip()[1:]
 title = title.strip()
-today = datetime.date.today()
 
-header = ["Title", "Price", "Date"]
-data = [title, price, today]
+gerar_csv.write_to_csv(title, price)
 
-# Create a csv file
-with open("AmazonWebScraping.csv", "w", newline="", encoding="UTF8") as f:
-    writer = csv.writer(f)
-    writer.writerow(header)
-    writer.writerow(data)
+# Read the csv file
 
-print(today)
+df = pd.read_csv("AmazonWebScraping.csv")
+
+print(df)
