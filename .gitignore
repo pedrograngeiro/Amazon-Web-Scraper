@@ -1,0 +1,6 @@
+# Ignorar pastas de cache do Python e caches do PyCharm
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.idea/
