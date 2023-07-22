@@ -38,4 +38,4 @@ def obter_lista_urls_paginas(url, numero_total_paginas):
     for numero_pagina in range(1, numero_total_paginas + 1):
         url_pagina = navegar_entre_paginas(url, numero_pagina)
         lista_urls.append(url_pagina)
-    return  lista_urls
+    return lista_urls
