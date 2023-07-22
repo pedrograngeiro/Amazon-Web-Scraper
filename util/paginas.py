@@ -22,3 +22,20 @@ def obter_numero_total_paginas(url):
     else:
         print(f"Não foi possível acessar a página. Status Code: {response.status_code}")
         return None
+
+def navegar_entre_paginas(url, numero_pagina):
+    if numero_pagina < 1:
+        numero_pagina = 1
+
+    url_partes = url.split("&page=")
+    base_url = url_partes[0]
+    pagina_param = f"&page={numero_pagina}"
+
+    return f"{base_url}{pagina_param}"
+
+def obter_lista_urls_paginas(url, numero_total_paginas):
+    lista_urls = []
+    for numero_pagina in range(1, numero_total_paginas + 1):
+        url_pagina = navegar_entre_paginas(url, numero_pagina)
+        lista_urls.append(url_pagina)
+    return  lista_urls
