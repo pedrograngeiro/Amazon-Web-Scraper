@@ -1,0 +1,5 @@
+csv
+datetime
+requests
+beautifulsoup4
+numpy
