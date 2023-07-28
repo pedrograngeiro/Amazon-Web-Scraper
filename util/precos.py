@@ -17,9 +17,20 @@ def check_price(url):
     soup = BeautifulSoup(page.content, "html.parser")
 
     # Encontre todos os elementos com a classe "a-size-base-plus a-color-base a-text-normal"
-    titles = soup.find_all(class_="a-size-base-plus a-color-base a-text-normal")
+    titles = soup.find_all(class_="a-section a-spacing-none a-spacing-top-small s-title-instructions-style")
+    prices = soup.find_all(class_="a-price")
 
     # Loop para extrair o texto de cada elemento encontrado
-    for title_element in titles:
+    # for title_element in titles:
+    #     title = title_element.get_text().strip()
+    #
+    #     gerar_csv.append_to_csv(title, )
+    #     print(title)
+    for idx, title_element in enumerate(titles):
         title = title_element.get_text().strip()
-        # gerar_csv.append_to_csv(title)
+        price_element = prices[idx]
+        price = price_element.get_text().strip()
+
+        gerar_csv.append_to_csv(title, price)
+
+        print(f'Title: {title}, Price: {price}')
