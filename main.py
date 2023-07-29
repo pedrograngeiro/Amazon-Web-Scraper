@@ -11,13 +11,9 @@ def rodando_checkagem_de_precos():
     total_paginas = obter_numero_total_paginas(url_pesquisa)
     numero_da_pagina = paginas.obter_lista_urls_paginas(url_pesquisa, total_paginas, print_info=False)
 
-    def processar_urls(lista_urls):
-        for url in lista_urls:
-            armazena_preco = check_price(url)
-            return armazena_preco
+    for url in numero_da_pagina:
+        check_price(url)
 
-    teste = processar_urls(numero_da_pagina)
-    print(teste)
 
 
 if __name__ == "__main__":
