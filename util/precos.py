@@ -1,3 +1,5 @@
+import os.path
+
 from bs4 import BeautifulSoup
 from util import extrator
 from util import gerar_csv
@@ -31,6 +33,10 @@ def check_price(url):
         price_element = prices[idx]
         price = price_element.get_text().strip()
 
-        gerar_csv.append_to_csv(title, price)
+        if not os.path.exists("AmazonWebScraping.csv"):
+            gerar_csv.write_to_csv(title, price)
+            gerar_csv.append_to_csv(title, price)
+        else:
+            gerar_csv.append_to_csv(title, price)
 
         print(f'Title: {title}, Price: {price}')
