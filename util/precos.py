@@ -6,6 +6,13 @@ from util import gerar_csv
 import requests
 
 def check_price(url):
+    """
+    Coleta informações de preços de produtos da Amazon a partir de uma URL.
+
+    :param url: A URL da página de pesquisa da Amazon.
+    :return: Nenhum valor de retorno direto. Os títulos e preços coletados são armazenados em um arquivo CSV.
+
+    """
     URL = url
 
     headers = {
